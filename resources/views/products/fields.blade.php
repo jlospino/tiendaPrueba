@@ -93,7 +93,8 @@
 <div class="row mt-3">
     <div class="col-md-6">
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Guardar</button> <a href="{{ url()->previous() }}" type="button" class="btn btn-warning ">Ir a la página anterior</a>
+            <a href="{{ url()->previous() }}" type="button" class="btn btn-secondary px-5">Ir a la página anterior</a>
+            <button type="submit" class="btn btn-primary px-5">Guardar</button>
         </div>
     </div>
 </div>

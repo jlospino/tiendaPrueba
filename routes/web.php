@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('getProducts', 'ProductController@getProducts')->name('getProducts');
-//Route::get('product/{slug}', 'ProductController@show')->name('product');
+Route::get('product/{slug}', 'ProductController@show')->name('product');
 Route::get('create', 'ProductController@create')->name('create');
 Route::post('store', 'ProductController@store')->name('store');
 /*Route::get('edit/{id}', 'ProductController@edit')->name('edit');

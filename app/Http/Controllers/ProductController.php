@@ -18,7 +18,6 @@ class ProductController extends Controller
     public function getProducts(Request $request) {
         $products = Product::orderBy('name','desc')->with('category')->get();
         $data = array();
-        $user = $request->user() ? $request->user()->id : 0;
         foreach($products as $p) {
             $data[] = array(
                 "id" => $p->id,
@@ -29,7 +28,7 @@ class ProductController extends Controller
                 "quantity" => $p->quantity,
                 "photo" => $p->photo,
                 "slug" => $p->slug,
-                "userId" => $user
+                "userId" => 0
             );
         }
         return response()->json($data);

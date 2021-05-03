@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<h4>Registrar Producto</h4>
+<h4><b>REGISTRAR PRODUCTO</b></h4>
 
 @isset($error)
     <div class="alert alert-danger" role="alert">

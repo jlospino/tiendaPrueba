@@ -27,15 +27,17 @@
         },
         methods:{
             getOrders(){
-                let newdate = new Date(this.date)
-                newdate.setDate(newdate.getDate() - 1)
-                axios.get('/getOrders', {
-                    params:{
-                        date: newdate
-                    }
-                }).then(res=>{
-                    this.$parent.orders = res.data;
-                })
+                if(this.date){
+                    let newdate = new Date(this.date)
+                    newdate.setDate(newdate.getDate())
+                    axios.get('/getOrders', {
+                        params:{
+                            date: newdate
+                        }
+                    }).then(res=>{
+                        this.$parent.orders = res.data;
+                    })
+                }
             }
         },
         mounted() {

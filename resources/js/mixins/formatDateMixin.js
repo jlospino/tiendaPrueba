@@ -1,13 +1,18 @@
 export default {
     methods: {
         formatDate(value) {
-            var opciones = { year: 'numeric', month: 'short', day: 'numeric' };
-            var fecha = new Date(value)
-            .toLocaleDateString('es',opciones)
-            .replace(/ /g,'/')
-            .replace('.','')
-            .replace(/-([a-z])/, function (x) {return '-' + x[1].toUpperCase()});
-            return fecha;
+            let date = new Date(value)
+
+            let day = date.getDate() + 1
+            let month = date.getMonth() + 1
+            let year = date.getFullYear()
+
+            if(month < 10){
+              date = `0${day}/0${month}/${year}`
+            }else{
+                date = `${day}-${month}-${year}`
+            }
+            return date;
         }
     }
   };

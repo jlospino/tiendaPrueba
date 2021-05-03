@@ -1938,6 +1938,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2085,15 +2091,17 @@ __webpack_require__.r(__webpack_exports__);
     getOrders: function getOrders() {
       var _this = this;
 
-      var newdate = new Date(this.date);
-      newdate.setDate(newdate.getDate() - 1);
-      axios.get('/getOrders', {
-        params: {
-          date: newdate
-        }
-      }).then(function (res) {
-        _this.$parent.orders = res.data;
-      });
+      if (this.date) {
+        var newdate = new Date(this.date);
+        newdate.setDate(newdate.getDate());
+        axios.get('/getOrders', {
+          params: {
+            date: newdate
+          }
+        }).then(function (res) {
+          _this.$parent.orders = res.data;
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -2197,6 +2205,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2211,8 +2220,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/getOrderById/' + this.id + '').then(function (res) {
-      _this.order = res.data;
       _this.user = res.data.user.name.toUpperCase();
+      _this.order = res.data;
     });
   },
   name: 'show-order',
@@ -2712,82 +2721,112 @@ var render = function() {
     [
       _c("search-component"),
       _vm._v(" "),
-      _vm._l(_vm.orders, function(item, index) {
-        return _c(
-          "div",
-          {
-            key: index,
-            staticClass: "row no-gutters bg-white position-relative mb-2 card-1"
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "col-md-12 position-static p-4 pl-md-0 pl-lg-4" },
-              [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-lg-8" }, [
-                    _c("h3", { staticClass: "mt-0" }, [
-                      _c("a", { attrs: { href: "showOrder/" + item.id } }, [
-                        _c("b", [_vm._v("COD(" + _vm._s(item.id) + ")")]),
-                        _vm._v(" - " + _vm._s(item.userName.toUpperCase()))
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "ul",
-                      _vm._l(item.products, function(product) {
-                        return _c("li", { key: product.id }, [
-                          _c("h6", { staticClass: "mb-0 fw-300" }, [
-                            _vm._v(_vm._s(product.name.toUpperCase()))
+      _vm._m(0),
+      _vm._v(" "),
+      _vm.orders.length
+        ? _c(
+            "div",
+            _vm._l(_vm.orders, function(item, index) {
+              return _c(
+                "div",
+                {
+                  key: index,
+                  staticClass:
+                    "row no-gutters bg-white position-relative mb-2 card-1"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-md-12 position-static p-4 pl-md-0 pl-lg-4"
+                    },
+                    [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-lg-8" }, [
+                          _c("h3", { staticClass: "mt-0" }, [
+                            _c(
+                              "a",
+                              { attrs: { href: "showOrder/" + item.id } },
+                              [
+                                _c("b", [
+                                  _vm._v("COD(" + _vm._s(item.id) + ")")
+                                ]),
+                                _vm._v(
+                                  " - " + _vm._s(item.userName.toUpperCase())
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "ul",
+                            _vm._l(item.products, function(product) {
+                              return _c("li", { key: product.id }, [
+                                _c("h6", { staticClass: "mb-0 fw-300" }, [
+                                  _vm._v(_vm._s(product.name.toUpperCase()))
+                                ])
+                              ])
+                            }),
+                            0
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-lg-4" }, [
+                          _c("h6", { staticClass: "mb-0 mt-3 fw-300" }, [
+                            _vm._v(_vm._s(_vm.formatDate(item.date)))
+                          ]),
+                          _vm._v(" "),
+                          _c("h3", [
+                            _c("small", [_vm._v("COP")]),
+                            _vm._v(" " + _vm._s(_vm.formatPrice(item.total)))
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "badge badge-warning font-weight-normal"
+                              },
+                              [_vm._v(_vm._s(item.status))]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "mb-3" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "btn btn-primary px-5",
+                                attrs: { href: "showOrder/" + item.id }
+                              },
+                              [_vm._v("Revisar Inventario")]
+                            )
                           ])
                         ])
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-4" }, [
-                    _c("h6", { staticClass: "mb-0 mt-3 fw-300" }, [
-                      _vm._v(_vm._s(_vm.formatDate(item.date)))
-                    ]),
-                    _vm._v(" "),
-                    _c("h3", [
-                      _c("small", [_vm._v("COP")]),
-                      _vm._v(" " + _vm._s(_vm.formatPrice(item.total)))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _c(
-                        "span",
-                        {
-                          staticClass: "badge badge-warning font-weight-normal"
-                        },
-                        [_vm._v(_vm._s(item.status))]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-3" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-primary px-5",
-                          attrs: { href: "showOrder/" + item.id }
-                        },
-                        [_vm._v("Revisar Inventario")]
-                      )
-                    ])
-                  ])
-                ])
-              ]
-            )
-          ]
-        )
-      })
+                      ])
+                    ]
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        : _c("div", [_c("h4", [_vm._v("No hay resultados para mostrar")])])
     ],
-    2
+    1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticClass: "mt-4 mb-3" }, [
+      _c("b", [_vm._v("LISTADO DE PEDIDOS")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -2837,7 +2876,7 @@ var render = function() {
                 _c("div", { staticClass: "col-lg-8" }, [
                   _c("h3", { staticClass: "mt-0" }, [
                     _c("a", { attrs: { href: "product/" + item.slug } }, [
-                      _vm._v(_vm._s(item.name.toUpperCase()))
+                      _vm._v(_vm._s(item.name))
                     ])
                   ]),
                   _vm._v(" "),
@@ -3014,6 +3053,12 @@ var render = function() {
               _c("label", [_vm._v(_vm._s(_vm.order.status))])
             ])
           ]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "btn btn-success col-lg-8", attrs: { href: "/" } },
+          [_vm._v("Volver")]
         )
       ]),
       _vm._v(" "),
@@ -17846,7 +17891,7 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('Products', __webpack_require__(/*! ./components/ProductComponent.vue */ "./resources/js/components/ProductComponent.vue"));
+Vue.component('Products', __webpack_require__(/*! ./components/ProductComponent.vue */ "./resources/js/components/ProductComponent.vue")["default"]);
 Vue.component('Search', __webpack_require__(/*! ./components/SearchComponent.vue */ "./resources/js/components/SearchComponent.vue"));
 Vue.component('show-order', __webpack_require__(/*! ./components/ShowOrderComponent.vue */ "./resources/js/components/ShowOrderComponent.vue")["default"]);
 Vue.component('Orders', __webpack_require__(/*! ./components/OrderComponent.vue */ "./resources/js/components/OrderComponent.vue")["default"]);
@@ -18150,15 +18195,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     formatDate: function formatDate(value) {
-      var opciones = {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      };
-      var fecha = new Date(value).toLocaleDateString('es', opciones).replace(/ /g, '/').replace('.', '').replace(/-([a-z])/, function (x) {
-        return '-' + x[1].toUpperCase();
-      });
-      return fecha;
+      var date = new Date(value);
+      var day = date.getDate() + 1;
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+
+      if (month < 10) {
+        date = "0".concat(day, "/0").concat(month, "/").concat(year);
+      } else {
+        date = "".concat(day, "-").concat(month, "-").concat(year);
+      }
+
+      return date;
     }
   }
 });

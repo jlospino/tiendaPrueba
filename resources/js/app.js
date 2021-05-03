@@ -22,7 +22,7 @@ window.axios = require('axios');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('Products', require('./components/ProductComponent.vue'));
+Vue.component('Products', require('./components/ProductComponent.vue').default);
 Vue.component('Search', require('./components/SearchComponent.vue'));
 Vue.component('show-order', require('./components/ShowOrderComponent.vue').default);
 Vue.component('Orders', require('./components/OrderComponent.vue').default);

@@ -46,7 +46,7 @@ class OrderController extends Controller
                 "id" => $order->id,
                 "status" => $order->status,
                 "total" => $total,
-                "date" => $order->created_at,
+                "date" => $order->required_date,
                 "userId" => $order->user->id,
                 "userName" => $order->user->name,
                 "products" => $order->products
@@ -60,7 +60,7 @@ class OrderController extends Controller
     }
 
     public function getOrderById($id){
-        $order = Order::find($id)->with('user','products', 'products.vendor')->first();
+        $order = Order::where('id',$id)->with('user','products', 'products.vendor')->first();
         return response()->json($order);
     }
 

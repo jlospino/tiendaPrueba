@@ -17,6 +17,7 @@
                         <label>{{ order.status }}</label>
                     </div>
                 </div>
+                <a href="/" class="btn btn-success col-lg-8">Volver</a>
             </div>
             <div class="col-lg-9">
                 <div class="row no-gutters bg-white position-relative mb-4 card-1 py-3 px-4">
@@ -87,13 +88,13 @@
         data() {
             return {
                 order: [],
-                user: ''
+                user: '',
             }
         },
         created(){
             axios.get('/getOrderById/'+this.id+'').then(res=>{
-                this.order = res.data;
                 this.user = res.data.user.name.toUpperCase();
+                this.order = res.data;
             })
         },
         name: 'show-order',

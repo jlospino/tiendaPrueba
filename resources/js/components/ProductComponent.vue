@@ -7,7 +7,7 @@
             <div class="col-md-9 position-static p-4 pl-md-0 pl-lg-4">
                 <div class="row">
                     <div class="col-lg-8">
-                        <h3 class="mt-0"><a :href="'product/'+item.slug">{{item.name.toUpperCase()}}</a></h3>
+                        <h3 class="mt-0"><a :href="'product/'+item.slug">{{item.name}}</a></h3>
                         <p class="font-light">{{item.description}}</p>
                     </div>
                     <div class="col-lg-4">
@@ -39,7 +39,7 @@
         },
         created(){
             axios.get('/getProducts').then(res=>{
-            this.products = res.data;
+                this.products = res.data;
             })
         },
         methods: {
